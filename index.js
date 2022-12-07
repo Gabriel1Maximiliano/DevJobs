@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 const router = require('./routes/index');
 const path = require('path');
 const app = express();
-
+require('dotenv').config({path:'variables.env'});
 
 // enable handlebars as view
 app.engine('handlebars', 
@@ -22,4 +22,4 @@ app.use('/', router());
  
  
 
-app.listen(5000);
+app.listen(process.env.PORT);
