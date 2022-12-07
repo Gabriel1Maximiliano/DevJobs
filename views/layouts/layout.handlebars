@@ -10,8 +10,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;900&family=Merriweather+Sans:wght@300&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./css/app.css">
-    <title>{{pageName}}</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/trix.css">
+    <title>{{nombrePagina}}</title>
 </head>
 
 <body>
@@ -19,29 +20,31 @@
         <h1>
             <a href="/">devJobs</a>
         </h1>
+
         {{#if barra}}
         <div class="buscador">
-            <form action="#">
-                <input type="text" class="busar">
-                <input type="submit" value="Buscar">
+            <form action="#" >
+                <input type="text" class="buscar" >
+                <input type="submit" value="Buscar" >
             </form>
         </div>
+
         {{/if}}
     </div>
-    <header class="site-header contenedor separador ">
-        <h2>Nombre página</h2>
+
+    <header class="site-header contenedor separador">
+        <h2>{{nombrePagina}}</h2>
         {{#if tagline}}
         <p class="tagline">{{tagline}}</p>
         {{/if}}
-    {{#if boton}}
-    <a href="/vacantes/nueva" class="btn btn-azul" >Publicar Nueva Vacante</a>
-    {{/if}}
+         {{#if tagline}} 
+         <a href="/vacante/nueva" class="btn btn-azul">Publicar nueva vacante</a>
+         {{/if}}
     </header>
-
-    <div class="contenido principal contenedor">
-        {{{body}}}
-    </div>
-
+<div class="contenido-principal contenedor">
+    {{{body}}}
+</div>
+<script src="/js/trix.js" ></script>
 </body>
 
 </html>
