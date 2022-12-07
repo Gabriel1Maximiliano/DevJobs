@@ -20,6 +20,7 @@ const MongoStore = require('connect-mongo');
 app.engine('handlebars', 
     exphbs({
         defaultLayout: 'layout',
+        helpers:require('./helpers/handlenbars')
         
     })
 ); 
