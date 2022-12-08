@@ -33,3 +33,15 @@ exports.showVacant= async(req,res,next) => {
 
     })
 }
+exports.editVacant=async(req,res,next)=>{
+
+    const vacante = await Vacante.findOne( {url:req.params.url }).lean();
+    if(!vacante){
+        return next();
+    };
+
+    res.render('editar-vacante',{
+        vacante,
+        nombrePágina:`Editar-${vacante.titulo}`
+    })
+}

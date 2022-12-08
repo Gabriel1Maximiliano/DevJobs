@@ -9,6 +9,9 @@ module.exports = () =>{
     router.post('/vacantes/nueva',vacantController.addVacant);
 // show vacant (only oune)
 router.get('/vacantes/:url',vacantController.showVacant);
+// edit vacant 
+
+router.put('/vacantes/editar/:url', vacantController.editVacant)
        return router;
 }
 
