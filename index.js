@@ -8,12 +8,14 @@ const app = express();
 const exphbs = require('express-handlebars');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-
+const bodyParser = require('body-parser');
 require('dotenv').config({path:'variables.env'});
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
+// enable bodyparser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 // enable handlebars
 
 app.engine('handlebars', 
