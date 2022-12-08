@@ -16,7 +16,8 @@ module.exports = () =>{
     // edit vacant 
     router.post('/vacantes/editar/:url', vacantController.editVacant)
     // create count
-    router.get('/crear-cuenta', userController.createCountForm);
+    router.get('/crear-cuenta', userController.getCountForm);
+    router.post('/crear-cuenta', userController.createCountForm);
         return router;
  }
 
