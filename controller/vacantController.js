@@ -18,5 +18,18 @@ exports.addVacant=async(req,res) => {
    // add a vacant in the database
    const nuevaVacante= await vacante.save();
    //redirection
-   res.redirection(`/vacantes/${nuevaVacante.url}`);
-}   
+   res.redirect(`/vacantes/${nuevaVacante.url}`);
+}  
+// show a vacant
+exports.showVacant= async(req,res,next) => {
+    const vacante = await Vacante.findOne( {url:req.params.url }).lean();
+    if(!vacante){
+        return next();
+    }
+    res.render('vacante',{
+        vacante,
+        nombrePágina:vacante.titulo,
+        barra:true,
+
+    })
+}
