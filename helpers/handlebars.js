@@ -12,4 +12,10 @@ module.exports = {
 
         return opciones.fn().html = html;
     },
+
+    tipoContrato: (selected, opciones) => {
+       return opciones.fn().replace(
+        new RegExp(`value="${selected}"`), '&$ selected="selected"'
+       )
+    }
 }

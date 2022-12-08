@@ -33,7 +33,8 @@ exports.showVacant= async(req,res,next) => {
 
     })
 }
-exports.editVacant=async(req,res,next)=>{
+exports.getVacant=async(req,res,next)=>{
+   
 
     const vacante = await Vacante.findOne({url:req.params.url }).lean();
     if(!vacante){
@@ -45,4 +46,18 @@ exports.editVacant=async(req,res,next)=>{
          vacante,
          nombrePágina:`Editar-${vacante.titulo}`
      })
+}
+exports.editVacant= async(req,res,next) => {
+    const vacanteActualizada = req.body;
+    console.log(vacanteActualizada)
+    vacanteActualizada.skills = req.body.skills.split(',');
+
+    const vacante = await Vacante.findOneAndUpdate(
+        {url:req.params.url },
+        vacanteActualizada,{
+            new: true,
+            runValidators:true
+        }).lean(); 
+        res.redirect(`/vacantes/${vacante.url}`); 
+  
 }

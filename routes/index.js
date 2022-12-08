@@ -8,10 +8,12 @@ module.exports = () =>{
     router.get('/', homeController.showjobs);
     router.post('/vacantes/nueva',vacantController.addVacant);
     // edit vacant 
-    router.get('/vacante/editar/:url', vacantController.editVacant);
-    // show vacant (only oune)
-router.get('/vacantes/:url',vacantController.showVacant);
+    router.get('/vacante/editar/:url',vacantController.getVacant);
+    // show vacant (only one)
+    router.get('/vacantes/:url',vacantController.showVacant);
+// edit vacant 
+ router.post('/vacantes/editar/:url', vacantController.editVacant)
 
-       return router;
-}
+        return router;
+ }
 
