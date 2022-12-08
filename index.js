@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 require('./config/db'); 
 
-const express = require('express');
-const exphbs = require('express-handlebars');
 
+const express = require('express');
 const router = require('./routes/index');
-const path = require('path');
 const app = express();
+const exphbs = require('express-handlebars');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 
 require('dotenv').config({path:'variables.env'});
@@ -14,21 +14,20 @@ require('dotenv').config({path:'variables.env'});
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
+// enable handlebars
 
-
-// enable handlebars as view
 app.engine('handlebars', 
     exphbs({
         defaultLayout: 'layout',
-        helpers:require('./helpers/handlenbars')
-        
+        helpers:require('./helpers/handlebars')
+   
     })
 ); 
 
- app.set('view engine', 'handlebars');
-
- // static files
+app.set('view engine', 'handlebars');
+// static files
 app.use(express.static(path.join(__dirname,'public')));
+
 app.use(cookieParser());
 
 app.use(session({
@@ -39,8 +38,8 @@ app.use(session({
      store: new MongoStore({ mongoUrl: process.env.DATABASE }),
 
 }))
-app.use('/', router());
- 
- 
 
-app.listen(process.env.PORT);
+
+app.use('/',router());
+
+app.listen(process.env.PORT,() => console.log('im alive'));
