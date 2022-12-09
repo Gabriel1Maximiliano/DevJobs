@@ -50,3 +50,10 @@ exports.createCountForm =async (req,res,next) => {
 
    
 }
+exports.logInUser = (req,res,next) => {
+
+    res.render('iniciar-sesion',{
+        nombrePágina:'Iniciar Sesión devJobs',
+        
+    })
+}

@@ -29,7 +29,8 @@ module.exports = () => {
     check('confirmar', 'El password ingresado es inválido').isLength({ min: 3 }),
     check('confirmar', 'El ambas claves deben ser iguales').equals('password')
     ], userController.createCountForm);
-     
+     // user authentication 
+     router.get('/iniciar-sesion', userController.logInUser)
     return router;
 }
 
