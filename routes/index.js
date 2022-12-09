@@ -2,6 +2,7 @@ const express = require('express');
 const homeController = require('../controller/homeController');
 const vacantController = require('../controller/vacantController');
 const userController = require('../controller/userController');
+const authController = require('../controller/authController');
 const router = express.Router();
 const { check } = require('express-validator');
 
@@ -30,7 +31,9 @@ module.exports = () => {
     check('confirmar', 'El ambas claves deben ser iguales').equals('password')
     ], userController.createCountForm);
      // user authentication 
-     router.get('/iniciar-sesion', userController.logInUser)
+     router.get('/iniciar-sesion', userController.logInUser);
+     router.post('/iniciar-sesion', authController.authenticateUser);
+
     return router;
 }
 

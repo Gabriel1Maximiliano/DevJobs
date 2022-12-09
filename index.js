@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const passport = require('./config/passport');
 
 //validate fields
 
@@ -45,6 +46,10 @@ app.use(session({
      store: new MongoStore({ mongoUrl: process.env.DATABASE }),
 
 }))
+
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 // Alerts and flash messages
 app.use(flash());
 // Create our middleware
