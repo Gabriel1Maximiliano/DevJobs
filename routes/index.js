@@ -47,7 +47,12 @@ module.exports = () => {
   //edit perfil
   router.get('/editar-perfil',authController.userVerification,
   userController.getProfile);
-  router.post('/editar-perfil',authController.userVerification,
+  router.post('/editar-perfil',authController.userVerification,[check('nombre', 'El nombre es oligatorio').notEmpty(),
+  check('nombre', 'El nombre debe tener al menos tres caracteres').isLength({ min: 3 }),
+  check('email', 'El email es Obligatorio').notEmpty(),
+  check('email', 'El email ingresado es inválido').isEmail(),
+  check('password', 'El password es Obligatorio').notEmpty(),
+  check('password', 'El password ingresado es inválido').isLength({ min: 3 })],
   userController.editProfile);
   // close session 
   router.get('/cerrar-sesion',authController.userVerification,

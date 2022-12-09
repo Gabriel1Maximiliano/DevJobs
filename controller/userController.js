@@ -72,6 +72,27 @@ exports.getProfile= (req,res,next) => {
 })
 }
 exports.editProfile= async(req,res,next) => {
+  const data = {
+    email: req.user.email,
+     nombre:req.user.nombre,
+   }
+  const errores= validationResult(req);
+    
+    if(errores) {
+         errores.errors.map(error => error.msg)
+       
+        req.flash('error', errores.errors.map(error => error.msg));
+       
+       return res.render('editar-perfil',{
+          nombrePagina:'Edita tu perfil en devJobs',
+          usuario:data,
+          cerrarSesion:true,
+          nombre: req.user.nombre,
+          mensajes:req.flash()
+          
+      })
+    }
+
   const usuario = await Usuarios.findById(req.user._id);
   usuario.nombre= req.body.nombre;
   usuario.email= req.body.email;
