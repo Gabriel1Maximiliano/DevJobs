@@ -11,13 +11,22 @@ module.exports = () => {
 
     router.get('/vacantes/nueva',vacantController.newVacantForm);
     router.get('/', homeController.showjobs);
-    router.post('/vacantes/nueva',authController.userVerification, vacantController.addVacant);
+    //create vacant
+    router.post('/vacantes/nueva',authController.userVerification,[check('titulo', 'Agrega un Titulo a la Vacante').notEmpty(),
+    check('empresa', 'Agrega una Empresa').notEmpty(),
+    check('ubicacion', 'Agrega una Ubicación').notEmpty(),
+    check('contrato', 'Selecciona el Tipo de Contrato').notEmpty(),
+    check('skills', 'Agrega al menos una habilidad').notEmpty()], vacantController.addVacant);
     // edit vacant 
     router.get('/vacante/editar/:url',authController.userVerification, vacantController.getVacant);
     // show vacant (only one)
     router.get('/vacante/:url',authController.userVerification, vacantController.showVacant);
     // edit vacant 
-    router.post('/vacantes/editar/:url', authController.userVerification,authController.userVerification,vacantController.editVacant)
+    router.post('/vacantes/editar/:url', authController.userVerification,[check('titulo', 'Agrega un Titulo a la Vacante').notEmpty(),
+    check('empresa', 'Agrega una Empresa').notEmpty(),
+    check('ubicacion', 'Agrega una Ubicación').notEmpty(),
+    check('contrato', 'Selecciona el Tipo de Contrato').notEmpty(),
+    check('skills', 'Agrega al menos una habilidad').notEmpty()],authController.userVerification,vacantController.editVacant)
     // create count 
     router.get('/crear-cuenta', userController.getCountForm); //confirmar
     router.post('/crear-cuenta', [check('nombre', 'El nombre es oligatorio').notEmpty(),

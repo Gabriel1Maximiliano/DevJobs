@@ -1,6 +1,6 @@
 
 const Vacante = require('../models/Vacante')
-
+const { validationResult } = require('express-validator');
 exports.newVacantForm = (req,res) => {
     res.render('nueva-vacante'
     ,{
@@ -13,6 +13,24 @@ exports.newVacantForm = (req,res) => {
 
 // add a vacat to data base
 exports.addVacant=async(req,res) => { 
+    
+    const errores= validationResult(req);
+    
+    if(errores) {
+       const data =  errores.errors.map(error => error.msg)
+       
+        req.flash('error', errores.errors.map(error => error.msg));
+       
+      return  res.render('nueva-vacante', {
+            nombrePagina: 'Nueva Vacante',
+            tagline: 'Llena el formulario y publica tu vacante',
+            cerrarSesion: true,
+            nombre : req.user.nombre,
+            mensajes: req.flash()
+        })
+    }
+
+    
    
     const vacante = new Vacante(req.body);
  // author of vacant
@@ -67,4 +85,30 @@ exports.editVacant= async(req,res,next) => {
         }).lean(); 
         res.redirect(`/vacantes/${vacante.url}`); 
   
+}
+
+exports.vacantValidator = (req,res,next) => {
+
+   
+
+    // validar
+    
+
+    const { validationResult } = require('express-validator');
+    const errores= validationResult(req);
+    if(errores) {
+        // Recargar la vista con los errores
+        //req.flash('error', errores.map(error => error.msg));
+        console.log(errores.errors)
+
+        res.render('nueva-vacante', {
+            nombrePagina: 'Nueva Vacante',
+            tagline: 'Llena el formulario y publica tu vacante',
+            cerrarSesion: true,
+            nombre : req.user.nombre,
+            mensajes: req.flash()
+        })
+    }
+
+    next(); // siguiente middleware
 }
