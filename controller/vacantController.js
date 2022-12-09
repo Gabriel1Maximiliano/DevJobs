@@ -5,7 +5,9 @@ exports.newVacantForm = (req,res) => {
     res.render('nueva-vacante'
     ,{
         nombrePágina:'Nueva Vacante',
-        tagline:'Llena el formulario y publica tu vacante '
+        tagline:'Llena el formulario y publica tu vacante ',
+        cerrarSesion:true,
+        nombre: req.user.nombre,
     })
 } 
 
@@ -32,6 +34,9 @@ exports.showVacant= async(req,res,next) => {
         vacante,
         nombrePágina:vacante.titulo,
         barra:true,
+        cerrarSesion:true,
+        nombre: req.user.nombre,
+        
 
     })
 }

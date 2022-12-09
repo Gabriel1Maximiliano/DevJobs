@@ -65,7 +65,9 @@ exports.getProfile= (req,res,next) => {
      }
   res.render('editar-perfil',{
     nombrePágina:'Edita tu perfil en devJobs',
-    usuario:data
+    usuario:data,
+    cerrarSesion:true,
+    nombre: req.user.nombre,
     
 })
 }

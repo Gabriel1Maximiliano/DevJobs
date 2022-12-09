@@ -13,6 +13,8 @@ const vacantes = await Vacante.find({autor:req.user._id}).lean();
     res.render('administracion',{
         nombrePágina:'Panel de Asministración',
         tagline:'Creá y administrá tus vacantes desde acá',
+        cerrarSesion:true,
+        nombre: req.user.nombre,
         vacantes
         
     })
