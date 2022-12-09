@@ -9,16 +9,16 @@ const { check } = require('express-validator');
 
 module.exports = () => {
 
-    router.get('/vacante/nueva', vacantController.newVacantForm);
+    router.get('/vacantes/nueva',vacantController.newVacantForm);
     router.get('/', homeController.showjobs);
-    router.post('/vacantes/nueva', vacantController.addVacant);
+    router.post('/vacantes/nueva',authController.userVerification, vacantController.addVacant);
     // edit vacant 
-    router.get('/vacante/editar/:url', vacantController.getVacant);
+    router.get('/vacante/editar/:url',authController.userVerification, vacantController.getVacant);
     // show vacant (only one)
-    router.get('/vacantes/:url', vacantController.showVacant);
+    router.get('/vacante/:url',authController.userVerification, vacantController.showVacant);
     // edit vacant 
-    router.post('/vacantes/editar/:url', vacantController.editVacant)
-    // create count
+    router.post('/vacantes/editar/:url', authController.userVerification,authController.userVerification,vacantController.editVacant)
+    // create count 
     router.get('/crear-cuenta', userController.getCountForm); //confirmar
     router.post('/crear-cuenta', [check('nombre', 'El nombre es oligatorio').notEmpty(),
     check('nombre', 'El nombre debe tener al menos tres caracteres').isLength({ min: 3 }),
@@ -33,7 +33,11 @@ module.exports = () => {
      // user authentication 
      router.get('/iniciar-sesion', userController.logInUser);
      router.post('/iniciar-sesion', authController.authenticateUser);
-
+  // panel administration
+  router.get('/administracion', authController.userVerification,authController.showPanel)
+  //edit perfil
+  router.get('/editar-perfil',authController.userVerification,
+  userController.editProfile) 
     return router;
 }
 

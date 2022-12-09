@@ -28,7 +28,7 @@ const usuariosSchema = new mongoose.Schema(
         token: String,
         expira:String,
     }
-);
+); 
 
 //hashear password
 

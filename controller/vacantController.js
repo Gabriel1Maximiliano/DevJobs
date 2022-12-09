@@ -11,14 +11,16 @@ exports.newVacantForm = (req,res) => {
 
 // add a vacat to data base
 exports.addVacant=async(req,res) => { 
-
+   
     const vacante = new Vacante(req.body);
+ // author of vacant
+ vacante.autor = req.user._id;
     // array skills is created
     vacante.skills = req.body.skills.split(',');
    // add a vacant in the database
    const nuevaVacante= await vacante.save();
    //redirection
-   res.redirect(`/vacantes/${nuevaVacante.url}`);
+   res.redirect(`/vacante/${nuevaVacante.url}`);
 }  
 // show a vacant
 exports.showVacant= async(req,res,next) => {

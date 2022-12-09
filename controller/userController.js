@@ -1,6 +1,6 @@
 
 const { validationResult } = require('express-validator');
-const { Query } = require('mongoose');
+
 const Usuarios = require('../models/Usuarios');
 
 exports.getCountForm=(req,res,next) => {
@@ -56,4 +56,16 @@ exports.logInUser = (req,res,next) => {
         nombrePágina:'Iniciar Sesión devJobs',
         
     })
+}
+exports.editProfile= (req,res,next) => {
+
+ const data = {
+      email: req.user.email,
+       nombre:  req.user.nombre,
+     }
+  res.render('editar-perfil',{
+    nombrePágina:'Edita tu perfil en devJobs',
+    usuario:data
+    
+})
 }
