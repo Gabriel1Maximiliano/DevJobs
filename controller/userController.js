@@ -5,7 +5,7 @@ const Usuarios = require('../models/Usuarios');
 
 exports.getCountForm=(req,res,next) => {
     res.render('crear-cuenta',{
-        nombrePágina:'Crea tu cuenta en devJobs',
+      nombrePagina:'Crea tu cuenta en devJobs',
         tagline:'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta'
     })
 }
@@ -31,7 +31,7 @@ exports.createCountForm =async (req,res,next) => {
      req.flash('error',result.errors.map(er=>(er.msg)));
 
     res.render('crear-cuenta',{
-         nombrePágina:'Crea tu cuenta en devJobs',
+      nombrePagina:'Crea tu cuenta en devJobs',
          tagline:'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
          mensajes: req.flash()
      })
@@ -53,7 +53,7 @@ exports.createCountForm =async (req,res,next) => {
 exports.logInUser = (req,res,next) => {
 
     res.render('iniciar-sesion',{
-        nombrePágina:'Iniciar Sesión devJobs',
+      nombrePagina:'Iniciar Sesión devJobs',
         
     })
 }
@@ -64,7 +64,7 @@ exports.getProfile= (req,res,next) => {
        nombre:req.user.nombre,
      }
   res.render('editar-perfil',{
-    nombrePágina:'Edita tu perfil en devJobs',
+    nombrePagina:'Edita tu perfil en devJobs',
     usuario:data,
     cerrarSesion:true,
     nombre: req.user.nombre,

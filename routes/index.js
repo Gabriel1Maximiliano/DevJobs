@@ -40,6 +40,9 @@ module.exports = () => {
   userController.getProfile);
   router.post('/editar-perfil',authController.userVerification,
   userController.editProfile);
+  // close session 
+  router.get('/cerrar-sesion',authController.userVerification,
+  authController.getSession,)
     return router;
 }
 

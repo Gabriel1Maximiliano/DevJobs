@@ -60,4 +60,4 @@ app.use((req,res,next)=>{
 
 app.use('/',router());
 
-app.listen(process.env.PORT,() => console.log('im alive'));
+app.listen(process.env.PORT,() => console.log('I am alive'));
