@@ -57,15 +57,27 @@ exports.logInUser = (req,res,next) => {
         
     })
 }
-exports.editProfile= (req,res,next) => {
+exports.getProfile= (req,res,next) => {
 
  const data = {
       email: req.user.email,
-       nombre:  req.user.nombre,
+       nombre:req.user.nombre,
      }
   res.render('editar-perfil',{
     nombrePágina:'Edita tu perfil en devJobs',
     usuario:data
     
 })
+}
+exports.editProfile= async(req,res,next) => {
+  const usuario = await Usuarios.findById(req.user._id);
+  usuario.nombre= req.body.nombre;
+  usuario.email= req.body.email;
+  if(req.body.password){
+    usuario.password= req.body.password;
+  }
+  await usuario.save();
+  // redirect
+ req.flash('correcto', 'Cambios Guardados Correctamente')
+  res.redirect('/administracion');
 }
