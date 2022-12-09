@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise=global.Promise;
 const slug = require('slug');
 const bcrypt = require('bcrypt');
-const shortid = require('shortid');
+
 
 
 const usuariosSchema = new mongoose.Schema(
@@ -42,6 +42,8 @@ const hash= await bcrypt.hash(this.password,10);
 this.password = hash;
 next();
 })
+usuariosSchema.post('save', function(error,doc,next){
 
+})
 module.exports = mongoose.model('Usuarios',usuariosSchema)
  

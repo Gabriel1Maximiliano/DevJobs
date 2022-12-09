@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 require('./config/db'); 
-
-
+require('dotenv').config({path:'variables.env'});
 const express = require('express');
 const router = require('./routes/index');
 const app = express();
@@ -9,10 +8,16 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-require('dotenv').config({path:'variables.env'});
-
+//const expressValidator = require('express-validator');
+const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+
+//validate fields
+
+//app.use(expressValidator());
+
+
 // enable bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -40,7 +45,13 @@ app.use(session({
      store: new MongoStore({ mongoUrl: process.env.DATABASE }),
 
 }))
-
+// Alerts and flash messages
+app.use(flash());
+// Create our middleware
+app.use((req,res,next)=>{
+    res.locals.mensajes = req.flash();
+    next();
+});
 
 app.use('/',router());
 
