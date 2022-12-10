@@ -42,8 +42,9 @@ exports.addVacant=async(req,res) => {
    //redirection
    res.redirect(`/vacante/${nuevaVacante.url}`);
 }  
-// show a vacant
+// show a vacant  
 exports.showVacant= async(req,res,next) => {
+    console.log('entre a get vacnates ')
     const vacante = await Vacante.findOne( {url:req.params.url }).lean();
     if(!vacante){
         return next();
@@ -87,7 +88,7 @@ exports.editVacant= async(req,res,next) => {
   
 }
 
-exports.vacantValidator = (req,res,next) => {
+exports.vacantValidator = (req,res,next) => { 
 
    
 
@@ -111,4 +112,13 @@ exports.vacantValidator = (req,res,next) => {
     }
 
     next(); // siguiente middleware
+}
+exports.deleteVacant= async (req,res,next) => {
+    //loza-gabriel-m4tnrlwdk loza-gabriel-m4tnrlwdk
+    
+    const vacanteBorrada = await Vacante.findOneAndDelete(req.params.id)
+    res.json({
+        data: vacanteBorrada
+    })
+  
 }

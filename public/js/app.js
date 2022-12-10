@@ -1,3 +1,5 @@
+//const { default: axios } = require("axios");
+const { default: Swal } = require("sweetalert2");
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,6 +16,11 @@ if(alertas){
         // when we are in edit , call function
         skillsSeleccionados();
     }
+    const vacantesListado = document.querySelector('.panel-administracion');
+
+    // if(vacantesListado){
+    //     vacantesListado.addEventListener('click',accionesListado);
+    // }
 }) 
 
 const skills = new Set();
@@ -66,4 +73,85 @@ const limpiarAlertas = () => {
         }
     },1000)
    
+}
+// delete vacants
+
+const accionesListado = (e) => {
+  
+    e.preventDefault()
+    console.log(typeof e.target)
+    console.log(e.target.dataset)
+    // if(e.target.dataset.eliminar){
+    //     // delete by axios
+    //     const swalWithBootstrapButtons = Swal.mixin({
+    //         customClass: {
+    //           confirmButton: 'btn btn-success',
+    //           cancelButton: 'btn btn-danger'
+    //         },
+    //         buttonsStyling: false
+    //       })
+          
+    //       swalWithBootstrapButtons.fire({
+    //         title: 'Are you sure?',
+    //         text: "You won't be able to revert this!",
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonText: 'Yes, delete it!',
+    //         cancelButtonText: 'No, cancel!',
+    //         reverseButtons: true
+    //       }).then((result) => {
+    //         if (result.isConfirmed) {
+    //           swalWithBootstrapButtons.fire(
+    //             'Deleted!',
+    //             'Your file has been deleted.',
+    //             'success'
+    //           )
+    //         } else if (
+    //           /* Read more about handling dismissals below */
+    //           result.dismiss === Swal.DismissReason.cancel
+    //         ) {
+    //           swalWithBootstrapButtons.fire(
+    //             'Cancelled',
+    //             'Your imaginary file is safe :)',
+    //             'error'
+    //           )
+    //         }
+    //       })
+    // }else{
+    //     //window.location.href = e.target.href;
+    //      const swalWithBootstrapButtons = Swal.mixin({
+    //         customClass: {
+    //           confirmButton: 'btn btn-success',
+    //           cancelButton: 'btn btn-danger'
+    //         },
+    //         buttonsStyling: false
+    //       })
+          
+    //       swalWithBootstrapButtons.fire({
+    //         title: 'Are you sure?',
+    //         text: "You won't be able to revert this!",
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonText: 'Yes, delete it!',
+    //         cancelButtonText: 'No, cancel!',
+    //         reverseButtons: true
+    //       }).then((result) => {
+    //         if (result.isConfirmed) {
+    //           swalWithBootstrapButtons.fire(
+    //             'Deleted!',
+    //             'Your file has been deleted.',
+    //             'success'
+    //           )
+    //         } else if (
+    //           /* Read more about handling dismissals below */
+    //           result.dismiss === Swal.DismissReason.cancel
+    //         ) {
+    //           swalWithBootstrapButtons.fire(
+    //             'Cancelled',
+    //             'Your imaginary file is safe :)',
+    //             'error'
+    //           )
+    //         }
+    //       })
+    // }
 }

@@ -8,9 +8,10 @@ const { check } = require('express-validator');
 
 
 module.exports = () => {
-
+    //landing page
+  router.get('/', homeController.showjobs);
+  /**--------------------------------VACANT---------------------------------------- */
     router.get('/vacantes/nueva',vacantController.newVacantForm);
-    router.get('/', homeController.showjobs);
     //create vacant
     router.post('/vacantes/nueva',authController.userVerification,[check('titulo', 'Agrega un Titulo a la Vacante').notEmpty(),
     check('empresa', 'Agrega una Empresa').notEmpty(),
@@ -26,7 +27,10 @@ module.exports = () => {
     check('empresa', 'Agrega una Empresa').notEmpty(),
     check('ubicacion', 'Agrega una Ubicación').notEmpty(),
     check('contrato', 'Selecciona el Tipo de Contrato').notEmpty(),
-    check('skills', 'Agrega al menos una habilidad').notEmpty()],authController.userVerification,vacantController.editVacant)
+    check('skills', 'Agrega al menos una habilidad').notEmpty()],authController.userVerification,vacantController.editVacant);
+    // delete vacant  
+    router.get('/vacante/eliminar/:id',vacantController.deleteVacant);
+   /**-------------------------USER----------------------------------------------------- */
     // create count 
     router.get('/crear-cuenta', userController.getCountForm); //confirmar
     router.post('/crear-cuenta', [check('nombre', 'El nombre es oligatorio').notEmpty(),
@@ -54,6 +58,7 @@ module.exports = () => {
   check('password', 'El password es Obligatorio').notEmpty(),
   check('password', 'El password ingresado es inválido').isLength({ min: 3 })],
   userController.editProfile);
+  //
   // close session 
   router.get('/cerrar-sesion',authController.userVerification,
   authController.getSession,)

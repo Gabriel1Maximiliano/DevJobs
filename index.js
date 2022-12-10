@@ -13,7 +13,8 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('./config/passport');
-
+const morgan = require('morgan')
+app.use(morgan('tiny')); 
 //validate fields
 
 //app.use(expressValidator());
@@ -27,7 +28,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.engine('handlebars', 
     exphbs({
         defaultLayout: 'layout',
-        helpers:require('./helpers/handlebars')
+        helpers:require('./helpers/handlebars'),
+        noEscape:false
    
     })
 ); 
